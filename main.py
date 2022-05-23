@@ -2,11 +2,24 @@
 import mne
 from pathlib import Path
 
-data_path = Path(mne.datasets.sample.data_path(verbose=False))
-sample_dir = data_path / 'MEG' / 'sample'
-subjects_dir = data_path / 'subjects'
+import json
 
-raw_path = sample_dir / 'sample_audvis_filt-0-40_raw.fif'
+#to fix
+#qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+with open('config.json') as config_json:
+    config = json.load(config_json)
+
+    # Read the meg file
+fwd_path= config.pop('forward')
+subjects_dir= config.pop('output')
+trans_path = config.pop('transform')
+
+
+
 
 report = mne.Report(title='BEM example')
 report.add_bem(
@@ -15,20 +28,7 @@ report.add_bem(
     width=256
 )
 
-trans_path = sample_dir / 'sample_audvis_raw-trans.fif'
-
-
-report.add_trans(
-    trans=trans_path, info=raw_path, subject='sample',
-    subjects_dir=subjects_dir, alpha=1.0, title='Coregistration'
-
-
-)
-
-
-fwd_path = sample_dir / 'sample_audvis-meg-oct-6-fwd.fif'
 
 
 report.add_forward(forward=fwd_path, title='Forward solution')
-
-report.save('report_mri_and_bem.html', overwrite=True)
+report.save('out_dir_report/report.html', overwrite=True)

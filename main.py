@@ -15,11 +15,11 @@ with open('config.json') as config_json:
 
     # Read the meg file
 fwd_path= config.pop('forward')
-#subjects_dir= config.pop('output')
-subject_dir='../62bcba44fd504b9f17ad2be0/61164b436135cd2478c53c88'
+
 trans_path = config.pop('transform')
 
-subject='output'
+subject=os.path.basename(config["output"])
+subjects_dir=os.path.dirname(config["output"])
 
 
 

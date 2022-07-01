@@ -18,8 +18,8 @@ fwd_path= config.pop('forward')
 
 trans_path = config.pop('transform')
 
-subject=os.path.basename(config["output"])
-subjects_dir=os.path.dirname(config["output"])
+subject=os.path.basename(config["freesurfer"])
+subjects_dir=os.path.dirname(config["freesurfer"])
 
 
 

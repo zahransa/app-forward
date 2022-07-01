@@ -1,7 +1,7 @@
 
 import mne
 from pathlib import Path
-
+import os
 import json
 
 #to fix
